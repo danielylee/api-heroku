@@ -14,6 +14,7 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json()); // Allows us to send parsed JSON to server
 
+// Submit data to todos object
 app.post('/todos', (req, res) => {
   var todo = new Todo({
     text: req.body.text
@@ -26,6 +27,7 @@ app.post('/todos', (req, res) => {
   });
 });
 
+// Grab all todos
 app.get('/todos', (req, res) => {
   Todo.find().then((todos) => {
     res.send({todos});
@@ -34,6 +36,7 @@ app.get('/todos', (req, res) => {
   });
 });
 
+// Grab a single todo by id
 app.get('/todos/:id', (req, res) => {
   var id = req.params.id;
 
@@ -51,6 +54,7 @@ app.get('/todos/:id', (req, res) => {
   });
 });
 
+// Remove a todo by id
 app.delete('/todos/:id', (req, res) => {
   var id = req.params.id;
 
@@ -67,6 +71,7 @@ app.delete('/todos/:id', (req, res) => {
   });
 });
 
+// Update a todo by id
 app.patch('/todos/:id', (req, res) => {
   var id = req.params.id;
   var body = _.pick(req.body, ['text', 'completed']);
@@ -90,6 +95,17 @@ app.patch('/todos/:id', (req, res) => {
     res.send({todo});
   }).catch((err) => {
     res.status(400).send();
+  });
+});
+
+app.post('/users', (req, res) => {
+  var body = _.pick(req.body, ['email', 'password']);
+  var user = new User(body);
+
+  user.save().then((user) => {
+    res.send(user);
+  }).catch((err) => {
+    res.status(400).send(err);
   });
 });
 
