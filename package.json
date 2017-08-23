@@ -2,7 +2,7 @@
   "name": "todo-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server/server.js",
     "test": "export NODE_ENV=test || SET NODE_ENV=test && mocha server/**/*.test.js",
@@ -20,6 +20,7 @@
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.2",
     "lodash": "^4.17.4",
+    "method-override": "^2.3.9",
     "mongodb": "^2.2.5",
     "mongoose": "^4.11.5",
     "validator": "^8.0.0"
